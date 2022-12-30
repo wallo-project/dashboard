@@ -8,7 +8,7 @@ function Home() {
 
   return (
     <>
-      <div className="min-h-screen pb-5 bg-gradient-to-b from-gray-100 dark:from-gray-900 via-green-200 dark:via-green-700 to-gray-100 dark:to-gray-900">
+      <div className="min-h-screen text-black dark:text-white pb-5 bg-gradient-to-b from-gray-100 dark:from-gray-900 via-green-200 dark:via-green-700 to-gray-100 dark:to-gray-900">
         <Header title="Documentation" />
         <main>
           <aside className="p-4 bg-blur rounded-r-xl bg-black/20 h-full float-left">
