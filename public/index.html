@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+  <html lang="en">
+    <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+    <meta name="author" content="Maxime A &amp; Alex V. &amp; Matthieu V. &amp; Benjamin P." />
+    <meta name="title" content="WALL-O Project" />
+    <meta name="name" content="WALL-O Project" />
+    <meta name="description" content="Wall-O is an autonomous vehicle able to follow a line on the ground and avoid obstacles. This project is carried out as part of the IT licence at CYU." />
+    <meta name="date" content="December 29th, 2022" />
+    <meta name="location" content="CY Cergy Paris University" />
+    <link rel="canonical" href="https://wall-o.benjaminpmd.fr" />
+
+    <!-- Facebook Meta Tags -->
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:url" content="https://wall-o.benjaminpmd.fr" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="WALL-O Project" />
+    <meta property="og:title" content="WALL-O Project" />
+    <meta property="og:description" content="Wall-O is an autonomous vehicle able to follow a line on the ground and avoid obstacles. This project is carried out as part of the IT licence at CYU." />
+    <meta property="og:image" content="%PUBLIC_URL%/favicon.ico" />
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:url" content="https://wall-o.benjaminpmd.fr" />
+    <meta name="twitter:card" content="summary_small_image" />
+    <meta name="twitter:title" content="WALL-O Project" />
+    <meta name="twitter:description" content="Wall-O is an autonomous vehicle able to follow a line on the ground and avoid obstacles. This project is carried out as part of the IT licence at CYU." />
+    <meta name="twitter:image" content="%PUBLIC_URL%/favicon.ico" />
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display&amp;display=swap" rel="stylesheet" />
+    <title>WALL-O Project</title>
+  </head>
+  <body class="dark:bg-gray-900 text-white">
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+  </body>
+  <script>
+    // storage of the theme
+if (localStorage.theme === "dark" || !("theme" in localStorage)) {
+  document.documentElement.classList.add("dark");
+} else {
+  document.documentElement.classList.remove("dark");
+}
+  </script>
+</html>
