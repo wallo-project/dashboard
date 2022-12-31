@@ -11,12 +11,6 @@ import Dashboard from "./routes/Dashboard";
 
 import Documentation from "./routes/Doc";
 
-import SetupDoc from "./routes/docs/Setup";
-
-import TutorialDoc from "./routes/docs/Tutorial";
-
-import TroubleshootDoc from "./routes/docs/Troubleshoot";
-
 import NotFound from "./routes/404";
 
 import './index.css';

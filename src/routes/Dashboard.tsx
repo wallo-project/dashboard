@@ -1,42 +1,130 @@
-import axios from "axios";
-import React, { useState, Component } from "react";
+import { useRef } from "react";
+
 import Header from "../components/header/Header";
 
-export default class Dashboard extends Component {
-  
-  public state: { speed: Number };
-  public interval: any;
+import ChartLine from "../components/dashboard/charts/ChartLine";
+import ChartRadar from "../components/dashboard/charts/ChartRadar";
+import Commands from "../components/dashboard/commands/Commands";
 
-  constructor(props: any) {
-    super(props);
-    this.state = { speed: 0 };
-  }
 
-  public fetchData() {
-    axios.get("http://127.0.0.1:8000/")
-    .then(response => {
-      this.setState({speed: response.data.counter});
-    })
-  }
+const data = [
+  {
+    time: 0,
+    speed: 0,
+    angle: 0,
+  },
+  {
+    time: 1,
+    speed: 0.15,
+    angle: 0,
+  },
+  {
+    time: 2,
+    speed: .3,
+    angle: 0,
+  },
+  {
+    time: 3,
+    speed: .28,
+    angle: 1,
+  },
+  {
+    time: 4,
+    speed: .3,
+    angle: 2,
+  },
+  {
+    time: 5,
+    speed: .3,
+    angle: 2,
+  },
+  {
+    time: 6,
+    speed: .3,
+    angle: 1,
+  },
+];
 
-  public componentDidMount(): void {
-    //this.interval = setInterval(this.fetchData.bind(this), 1000);
-  }
+const dataRadar = [
+  {
+    area: "front",
+    distance: 200,
+  },
+  {
+    area: "front right",
+    distance: 200,
+  },
+  {
+    area: "right",
+    distance: 200,
+  },
+  {
+    area: "back right",
+    distance: 0,
+  },
+  {
+    area: "back",
+    distance: 0
+  },
+  {
+    area: "back left",
+    distance: 0
+  },
+  {
+    area: "left",
+    distance: 200,
+  },
+  {
+    area: "front left",
+    distance: 170,
+  },
+];
 
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
+export default function Dashboard() {
 
-  public render() {
-    return (
-      <>
-        <div className="min-h-screen text-black dark:text-white">
-          <Header title="Dashboard" />
-          <main>
-            <p>{String(this.state.speed)}</p>
-          </main>
-        </div>
-      </>
-    );
-  }
+  const speedChartLine = useRef<ChartLine>(null);
+  const angleChartLine = useRef<ChartLine>(null);
+  const obstacleChartRadar = useRef<ChartRadar>(null);
+
+  const updateSpeedChart = (time: number, value: number) => {
+    if (speedChartLine.current) {
+      speedChartLine.current.updateChart({ time: time, value: value});
+    }
+  };
+
+  const updateAngleChart = (time: number, value: number) => {
+    if (angleChartLine.current) {
+      angleChartLine.current.updateChart({ time: time, value: value});
+    }
+  };
+
+  const updateObstacleChart = (domain: string, distance: number) => {
+    if (obstacleChartRadar.current) {
+      obstacleChartRadar.current.updateChart(domain, distance);
+    }
+  };
+
+
+  return (
+    <>
+      <div className="min-h-screen text-black dark:text-white">
+        <Header title="Dashboard- Work In Progress" />
+        <main>
+          <section className="mx-4">
+            <h2 className="text-center text-3xl pb-2">Telemetry</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 object-center text-center align-center mx-auto">
+              <ChartLine ref={speedChartLine} data={data} name="Speed (cm*s^-1)" dataKey="speed" width={400} height={300} enableGrid={true} />
+              <ChartLine ref={angleChartLine} data={data} name="Angle (°)" dataKey="angle" width={400} height={300} strokeColor="#00FF00" enableGrid={true} />
+              <ChartRadar ref={obstacleChartRadar} data={dataRadar} axisKey={"area"} dataKey={"distance"} legend={"Distance from obstacle (cm)"} strokeColor={"#5555FF"} fillColor={"#0000CC"}  />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 object-center text-center align-center mx-auto">
+              <div></div>
+              <Commands />
+            </div>
+          </section>
+          
+        </main>
+      </div>
+    </>
+  );
 }
