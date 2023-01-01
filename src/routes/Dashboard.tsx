@@ -1,10 +1,11 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 import Header from "../components/header/Header";
 
 import ChartLine from "../components/dashboard/charts/ChartLine";
 import ChartRadar from "../components/dashboard/charts/ChartRadar";
 import Commands from "../components/dashboard/commands/Commands";
+import ApiAddressSetup from "../components/dashboard/commands/ApiAddressSetup";
 
 
 const data = [
@@ -82,6 +83,8 @@ const dataRadar = [
 
 export default function Dashboard() {
 
+  const [connected, setConnection] = useState(false)
+
   const speedChartLine = useRef<ChartLine>(null);
   const angleChartLine = useRef<ChartLine>(null);
   const obstacleChartRadar = useRef<ChartRadar>(null);
@@ -109,7 +112,8 @@ export default function Dashboard() {
     <>
       <div className="min-h-screen text-black dark:text-white">
         <Header title="Dashboard- Work In Progress" />
-        <main>
+        { !connected && <ApiAddressSetup /> }
+        <main className={"w-full min-h-screen" + connected? " blur" : ""}>
           <section className="mx-4">
             <h2 className="text-center text-3xl pb-2">Telemetry</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 object-center text-center align-center mx-auto">

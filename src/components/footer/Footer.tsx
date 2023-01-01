@@ -25,7 +25,7 @@ function Footer() {
                 <span className="text-red-500">-O</span>
               </p>
               <p className="opacity-70">
-                Wall-O is an autnomous vehicle able to follow a line on the
+                Wall-O is an autonomous vehicle able to follow a line on the
                 ground and avoid obstacles. This project is carried out as part
                 of the IT licence at CYU.
               </p>
