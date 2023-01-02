@@ -8,9 +8,9 @@ export default function Header(props: Props) {
 
   const routes = [
     { name: "Home", to: "/" },
-    { name: "Dashboard", to: "/dashboard" },
-    { name: "Documentation", to: "/docs" },
     { name: "About", to: "/about" },
+    { name: "Documentation", to: "/docs" },
+    { name: "Dashboard", to: "/dashboard" },
   ];
 
   return (

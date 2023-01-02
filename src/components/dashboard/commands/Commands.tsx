@@ -1,19 +1,18 @@
 import { useState } from "react"
+import { useSelector } from "react-redux";
+import { getApiAddress } from "../../../store/apiSlice";
 
 export default function Commands() {
     const [active, setActive] = useState(false);
-    const [buttonTitle, setButtonTitle] = useState(active? "Stop" : "Start")
 
     const activeButtonClick = () => {
         if (!active) {
             // call api for start
             setActive(true);
-            setButtonTitle("Stop");
         }
         else {
             // call api for stop
             setActive(false);
-            setButtonTitle("Start");
         }
     }
     return (
