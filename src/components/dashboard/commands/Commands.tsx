@@ -1,20 +1,36 @@
+import axios from "axios";
 import { useState } from "react"
-import { useSelector } from "react-redux";
 import { getApiAddress } from "../../../store/apiSlice";
+import { useAppSelector } from "../../../store/hooks";
 
 export default function Commands() {
+    const apiAddress = useAppSelector(getApiAddress);
     const [active, setActive] = useState(false);
+
+    const sendCommand = (command: string) => {
+        console.log(`${apiAddress}/command/${command}`)
+        axios.get(`${apiAddress}/command/${command}`)
+        .then(response => {
+            console.log(response.data)
+        })
+        .catch(e => {
+            console.error(e)
+        })
+    }
 
     const activeButtonClick = () => {
         if (!active) {
             // call api for start
             setActive(true);
+            sendCommand("start")
         }
         else {
             // call api for stop
             setActive(false);
+            sendCommand("stop")
         }
     }
+
     return (
         <>
             <article className="object-center mt-5 px-10 mx-auto bg-black/30 rounded-xl h-full w-full">
