@@ -1,6 +1,4 @@
 import { useState } from "react"
-import { useSelector } from "react-redux";
-import { getApiAddress } from "../../../store/apiSlice";
 
 export default function Commands() {
     const [active, setActive] = useState(false);

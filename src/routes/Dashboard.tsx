@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef /*, useState*/ } from "react";
 
 import Header from "../components/header/Header";
 
@@ -91,23 +91,23 @@ export default function Dashboard() {
   const angleChartLine = useRef<ChartLine>(null);
   const obstacleChartRadar = useRef<ChartRadar>(null);
 
-  const updateSpeedChart = (time: number, value: number) => {
-    if (speedChartLine.current) {
-      speedChartLine.current.updateChart({ time: time, value: value});
-    }
-  };
-
-  const updateAngleChart = (time: number, value: number) => {
-    if (angleChartLine.current) {
-      angleChartLine.current.updateChart({ time: time, value: value});
-    }
-  };
-
-  const updateObstacleChart = (domain: string, distance: number) => {
-    if (obstacleChartRadar.current) {
-      obstacleChartRadar.current.updateChart(domain, distance);
-    }
-  };
+  //const updateSpeedChart = (time: number, value: number) => {
+  //  if (speedChartLine.current) {
+  //    speedChartLine.current.updateChart({ time: time, value: value});
+  //  }
+  //};
+//
+  //const updateAngleChart = (time: number, value: number) => {
+  //  if (angleChartLine.current) {
+  //    angleChartLine.current.updateChart({ time: time, value: value});
+  //  }
+  //};
+//
+  //const updateObstacleChart = (domain: string, distance: number) => {
+  //  if (obstacleChartRadar.current) {
+  //    obstacleChartRadar.current.updateChart(domain, distance);
+  //  }
+  //};
 
 
   return (
