@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 const apiSlice = createSlice({
   name: "api",
   initialState: {
+    
     isConnected: false,
     apiAddress: "http://127.0.0.1:8080",
   },

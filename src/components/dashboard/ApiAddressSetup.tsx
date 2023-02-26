@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { apiActions } from "../../../store/apiSlice";
+import { apiActions } from "../../store/apiSlice";
 
 export default function ApiAddressSetup() {
   const dispatch = useDispatch();

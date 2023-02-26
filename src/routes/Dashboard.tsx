@@ -1,134 +1,133 @@
-import { useRef /*, useState*/ } from "react";
-
 import Header from "../components/header/Header";
-
-import ChartLine from "../components/dashboard/charts/ChartLine";
-import ChartRadar from "../components/dashboard/charts/ChartRadar";
-import Commands from "../components/dashboard/commands/Commands";
-import ApiAddressSetup from "../components/dashboard/commands/ApiAddressSetup";
-import { isConnected } from "../store/apiSlice";
+import Commands from "../components/dashboard/Commands";
+import ApiAddressSetup from "../components/dashboard/ApiAddressSetup";
+import { getApiAddress, isConnected } from "../store/apiSlice";
 import { useAppSelector } from "../store/hooks";
-
-
-const data = [
-  {
-    time: 0,
-    speed: 0,
-    angle: 0,
-  },
-  {
-    time: 1,
-    speed: 0.15,
-    angle: 0,
-  },
-  {
-    time: 2,
-    speed: .3,
-    angle: 0,
-  },
-  {
-    time: 3,
-    speed: .28,
-    angle: 1,
-  },
-  {
-    time: 4,
-    speed: .3,
-    angle: 2,
-  },
-  {
-    time: 5,
-    speed: .3,
-    angle: 2,
-  },
-  {
-    time: 6,
-    speed: .3,
-    angle: 1,
-  },
-];
-
-const dataRadar = [
-  {
-    area: "front",
-    distance: 200,
-  },
-  {
-    area: "front right",
-    distance: 200,
-  },
-  {
-    area: "right",
-    distance: 200,
-  },
-  {
-    area: "back right",
-    distance: 0,
-  },
-  {
-    area: "back",
-    distance: 0
-  },
-  {
-    area: "back left",
-    distance: 0
-  },
-  {
-    area: "left",
-    distance: 200,
-  },
-  {
-    area: "front left",
-    distance: 170,
-  },
-];
+import {
+  CartesianGrid,
+  Legend,
+  Line,
+  LineChart,
+  PolarAngleAxis,
+  PolarGrid,
+  PolarRadiusAxis,
+  Radar,
+  RadarChart,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+import { useEffect, useState } from "react";
+import StatusDisplay from "../components/dashboard/StatusDisplay";
 
 export default function Dashboard() {
-
   const connected = useAppSelector(isConnected);
+  const apiAddress = useAppSelector(getApiAddress);
 
-  const speedChartLine = useRef<ChartLine>(null);
-  const angleChartLine = useRef<ChartLine>(null);
-  const obstacleChartRadar = useRef<ChartRadar>(null);
+  const [distanceData, setDistanceData] = useState<{ time: string; value: number }[]>([]);
+  const [radarData, setRadarData] = useState<{ area: string, value: number }[]>([]);
+  const [statusData, setStatusData] = useState<any>({
+    time: "None",
+    running: -1,
+    distance: -1,
+    left: -1,
+    front: -1,
+    right: -1,
+    lineDetection: -1,
+    commandResponse: -1,
+  });
 
-  //const updateSpeedChart = (time: number, value: number) => {
-  //  if (speedChartLine.current) {
-  //    speedChartLine.current.updateChart({ time: time, value: value});
-  //  }
-  //};
-//
-  //const updateAngleChart = (time: number, value: number) => {
-  //  if (angleChartLine.current) {
-  //    angleChartLine.current.updateChart({ time: time, value: value});
-  //  }
-  //};
-//
-  //const updateObstacleChart = (domain: string, distance: number) => {
-  //  if (obstacleChartRadar.current) {
-  //    obstacleChartRadar.current.updateChart(domain, distance);
-  //  }
-  //};
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const newDistanceData = [...distanceData];
 
+      if (connected) {
+        fetch(`${apiAddress}/latest-data`).then((response) => {
+
+          response.json().then((data) => {
+
+            if (newDistanceData.length > 50) {
+              newDistanceData.shift();
+            }
+            newDistanceData.push({
+              time: data.time.substring(11, 19),
+              value: data.distance,
+            });
+
+            const newRadarData = [
+              { area: "front", value: data.front },
+              { area: "front left", value: data.left },
+              { area: "back left", value: 0 },
+              { area: "back", value: 0 },
+              { area: "back right", value: 0 },
+              { area: "front right", value: data.right },
+              
+            ]
+
+            setDistanceData(newDistanceData);
+
+            setRadarData(newRadarData);
+
+            setStatusData(data);
+          });
+        });
+      }
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, [distanceData, apiAddress, radarData, connected, statusData]);
 
   return (
     <>
       <div className="min-h-screen text-black dark:text-white">
-        <Header title="Dashboard- Work In Progress" />
-        { !connected && <ApiAddressSetup /> }
-        <main className={connected? "w-full min-h-screen" : "w-full min-h-screen blur"}>
+        <Header title="Dashboard" />
+        {!connected && <ApiAddressSetup />}
+        <main
+          className={
+            connected ? "w-full min-h-screen" : "w-full min-h-screen blur"
+          }
+        >
           <section className="mx-4">
-            <h2 className="text-center text-3xl pb-2">Telemetry</h2>
+            <h2 className="text-center text-3xl pb-2">WALL-O Telemetry</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 object-center text-center align-center mx-auto">
-              <ChartLine ref={speedChartLine} data={data} name="Speed (cm*s^-1)" dataKey="speed" width={400} height={300} enableGrid={true} />
-              <ChartLine ref={angleChartLine} data={data} name="Angle (°)" dataKey="angle" width={400} height={300} strokeColor="#00FF00" enableGrid={true} />
-              <ChartRadar ref={obstacleChartRadar} data={dataRadar} axisKey={"area"} dataKey={"distance"} legend={"Distance from obstacle (cm)"} strokeColor={"#5555FF"} fillColor={"#0000CC"}  />
+              <LineChart width={500} height={300} data={distanceData}>
+                <CartesianGrid strokeDasharray="3 3" color="#101010" />
+                <XAxis dataKey="time" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Line
+                  type="monotone"
+                  dataKey="value"
+                  name="Distance measured (cm)"
+                  stroke="#FF0000"
+                  strokeWidth={3}
+                  dot={false}
+                  animationDuration={0}
+                />
+              </LineChart>
+
+              <RadarChart width={500} height={300} data={radarData}>
+                <PolarGrid />
+                <PolarAngleAxis dataKey="area" />
+                <PolarRadiusAxis angle={0} domain={[0, 40]} />
+                <Radar
+                  name="Distance"
+                  dataKey="value"
+                  stroke="#8884d8"
+                  fill="#8884d8"
+                  fillOpacity={0.6}
+                  animationDuration={1}
+                />
+                <Legend />
+              </RadarChart>
+              <StatusDisplay data={statusData} />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 object-center text-center align-center mx-auto">
               <div></div>
               <Commands />
             </div>
           </section>
-          
         </main>
       </div>
     </>

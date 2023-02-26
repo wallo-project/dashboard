@@ -1,4 +1,5 @@
 import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
+
 import apiSlice from "./apiSlice";
 
 export const store = configureStore({
