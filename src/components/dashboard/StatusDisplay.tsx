@@ -20,21 +20,21 @@ const StatusDisplay: React.FC<Props> = (props) => {
       <h3 className="text-2xl">Status</h3>
       <table className="text-left mx-auto m-5">
         <tbody>
-            <tr className={(props.data.running !== -1)? "text-green-400" : "text-red-400"}>
+            <tr className={(props.data.running !== -1)? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}>
             <th className="m-2">WALL-O Connection</th>
             <td className="px-5 font-bold">{(props.data.running !== -1)? "Connected" : "Disconnected"}</td>
             </tr>
-            <tr className={(props.data.running === 1)? "text-green-400" : "text-red-400"}>
+            <tr className={(props.data.running === 1)? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}>
             <th className="m-2">Running</th>
             <td className="px-5 font-bold">{(props.data.running === 1)? "Yes" : "No"}</td>
             </tr>
-            <tr className={(props.data.lineDetection === 1)? "text-green-400" : "text-red-400"}>
+            <tr className={(props.data.lineDetection === 1)? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}>
             <th className="m-2">Detecting line</th>
             <td className="px-5 font-bold">{(props.data.lineDetection === 1)? "Yes" : "No"}</td>
             </tr>
-            <tr className="p-10">
+            <tr className={(props.data.commandResponse === 1)? "text-green-600 dark:text-green-400" : "text-blue-600 dark:text-blue-400"}>
             <th className="m-2">Command Response</th>
-            <td className="px-5 font-bold">{(props.data.commandResponse === 1)? "Yes" : "No"}</td>
+            <td className="px-5 font-bold">{(props.data.commandResponse === 1)? "Confirmed" : "Waiting"}</td>
             </tr>
 
             <tr className="p-10">

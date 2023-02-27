@@ -46,27 +46,29 @@ export default function Dashboard() {
 
           response.json().then((data) => {
 
-            if (newDistanceData.length > 50) {
-              newDistanceData.shift();
+            if (data.running === 1) {
+              if (newDistanceData.length > 50) {
+                newDistanceData.shift();
+              }
+              newDistanceData.push({
+                time: data.time.substring(11, 19),
+                value: data.distance,
+              });
+  
+              const newRadarData = [
+                { area: "front", value: data.front },
+                { area: "front left", value: data.left },
+                { area: "back left", value: 0 },
+                { area: "back", value: 0 },
+                { area: "back right", value: 0 },
+                { area: "front right", value: data.right },
+                
+              ]
+  
+              setDistanceData(newDistanceData);
+  
+              setRadarData(newRadarData);
             }
-            newDistanceData.push({
-              time: data.time.substring(11, 19),
-              value: data.distance,
-            });
-
-            const newRadarData = [
-              { area: "front", value: data.front },
-              { area: "front left", value: data.left },
-              { area: "back left", value: 0 },
-              { area: "back", value: 0 },
-              { area: "back right", value: 0 },
-              { area: "front right", value: data.right },
-              
-            ]
-
-            setDistanceData(newDistanceData);
-
-            setRadarData(newRadarData);
 
             setStatusData(data);
           });
