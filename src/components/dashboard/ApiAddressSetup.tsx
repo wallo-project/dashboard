@@ -27,12 +27,13 @@ export default function ApiAddressSetup() {
   const handleApiConfig = (e: any) => {
     e.preventDefault()
     setErrorStatus(false);
-    setMessage("Loading...")
+    setMessage("Loading...");
     try {
       axios
         .get(`http://${ipValue}:${portValue}/healthcheck`)
         .then((response: any) => {
-          if (response.data.status === "OK") {
+          console.log(response)
+          if (response.status === 200) {
             dispatch(
               apiActions.setApiAddress({
                 ipAddress: ipValue,
