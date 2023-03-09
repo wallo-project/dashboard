@@ -1,7 +1,6 @@
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import Setup from "../components/docs/Setup";
-import Tutorial from "../components/docs/Tutorial";
 import Troubleshoot from "../components/docs/Troubleshoot";
 
 export default function Docs() {
@@ -11,7 +10,6 @@ export default function Docs() {
         <Header title="Documentation" />
         <main>
           <Setup />
-          <Tutorial />
           <Troubleshoot />
         </main>
       </div>
