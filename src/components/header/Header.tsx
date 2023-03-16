@@ -1,5 +1,6 @@
 import Navbar from "./Navbar";
 
+// interface of Props required
 interface Props {
   title: string;
 }
