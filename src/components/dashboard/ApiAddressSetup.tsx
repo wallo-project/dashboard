@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { apiActions } from "../../store/apiSlice";
@@ -40,8 +39,7 @@ export default function ApiAddressSetup() {
     setMessage("Loading...");
     // try to call the API
     try {
-      axios
-        .get(`http://${ipValue}:${portValue}/healthcheck`)
+      fetch(`http://${ipValue}:${portValue}/healthcheck`)
         .then((response: any) => {
           if (response.status === 200) {
             // if the response is OK, dispatch the address of the API
