@@ -53,7 +53,7 @@ export default function Setup() {
               <ol className="list-decimal ml-5">
                 <li>Download the code of the server <a className="underline" href="https://github.com/wallo-project/server" rel="noreferrer" target="_blank">here</a></li>
                 <li>Create the python environment using the command "python venv -m .venv" in your terminal. (you need to go in the project directory)</li>
-                <li>Activate the python environment using the command "[path of the project]/.venv/Scripts/Activate.ps1/.bat" (Select .pS1 if you are using Windows Powershell, .bat otherwise)</li>
+                <li>Activate the python environment using the command "[path of the project]/.venv/Scripts/Activate.ps1/.bat" (Select .ps1 if you are using Windows Powershell, .bat otherwise)</li>
                 <li>Install the libraries using "pip install -r requirements.txt"</li>
                 <li>Run the server using "python ./src/main.py"</li>
               </ol>
