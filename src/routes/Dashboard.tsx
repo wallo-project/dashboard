@@ -33,6 +33,7 @@ export default function Dashboard() {
     left: -1,
     front: -1,
     right: -1,
+    lineDetectionSensors: -1,
     lineDetection: -1,
     commandResponse: -1,
   });
