@@ -58,12 +58,11 @@ export default function Dashboard() {
   
               const newRadarData = [
                 { area: "front", value: data.front },
-                { area: "front left", value: data.left },
-                { area: "back left", value: 0 },
-                { area: "back", value: 0 },
-                { area: "back right", value: 0 },
                 { area: "front right", value: data.right },
-                
+                { area: "back right", value: 0 },
+                { area: "back", value: 0 },
+                { area: "back left", value: 0 },
+                { area: "front left", value: data.left },
               ]
   
               setDistanceData(newDistanceData);
