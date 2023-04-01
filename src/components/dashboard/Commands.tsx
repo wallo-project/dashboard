@@ -1,12 +1,26 @@
+/**
+ * Component that export the component to control the robot.
+ * 
+ * @author WALL-O Dev Team
+ * @version 1.0.0
+ * @since 01/01/2023
+ */
+
+// import required elements
 import axios from "axios";
 import { useState } from "react";
-import { getApiAddress } from "../../store/apiSlice";
+import { getApiAddress, isConnected } from "../../store/apiSlice";
 import { useAppSelector } from "../../store/hooks";
 
-// creates the component
+/**
+ * Function that return the command component
+ * 
+ * @returns JSX.Element.
+ */
 export default function Commands() {
   // app selector is used to fetch data from the store
   const apiAddress = useAppSelector(getApiAddress);
+  const connected = useAppSelector(isConnected);
 
   // using the useState function to sync data through the component
   const [active, setActive] = useState(false);
@@ -19,6 +33,9 @@ export default function Commands() {
 
   // function executed on button click to start or stop wall-o
   const activeButtonClick = () => {
+    if (!connected) {
+      return;
+    }
     if (!active) {
       // call api for start
       setActive(true);
@@ -32,6 +49,9 @@ export default function Commands() {
 
   // function executed on button click to enable or disable line tracking sensors
   const activeSensorsClick = () => {
+    if (!connected) {
+      return;
+    }
     if (!activeSensors) {
       // call api to enable sensors
       setActiveSensors(true);
@@ -73,7 +93,7 @@ export default function Commands() {
           </button>
           <a
             className="block text-center object-center md:col-span-2 my-3 p-3 rounded-xl bg-blue-300 dark:bg-blue-700 hover:bg-blue-200 dark:hover:bg-blue-800 w-full duration-300"
-            href={downloadRoute}
+            href={connected? downloadRoute : "#"}
           >
             Download Data
           </a>

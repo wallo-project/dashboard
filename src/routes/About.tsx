@@ -1,13 +1,22 @@
+/**
+ * Component that export the About page.
+ * 
+ * @author WALL-O Dev Team
+ * @version 1.0.0
+ * @since 01/01/2023
+ */
+
+// import required elements
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import { Link } from "react-router-dom";
 
 /**
- * Function that returns the documentation page.
+ * Function that returns the about page.
  * 
- * @returns an object of type JSX.Element.
+ * @returns JSX.Element.
  */
-function About() {
+export default function About() {
   return (
     <>
       <div className="min-h-screen text-black dark:text-white pb-5 bg-gradient-to-b from-gray-100 dark:from-gray-900 via-orange-200 dark:via-orange-700 to-gray-100 dark:to-gray-900">
@@ -15,10 +24,7 @@ function About() {
         <main className="m-5">
           <section>
             <h2 className="text-2xl text-center font-bold">WALL-O Project Presentation</h2>
-            <figure className="mx-auto object-center">
-              <img src="https://wall-o.benjaminpmd.fr/img/wallo.png" alt="wall-o" className="mx-auto object-center" />
-              <figcaption className="text-center">WALL-O Robot</figcaption>
-            </figure>
+            <img src="/img/wallo.png" alt="wall-o" className="mx-auto object-center" />
             <article className="p-2 my-3 mx-auto rounded-xl bg-black/20 max-w-3xl">
               <h3 className="text-center text-xl font-bold m-3">The team</h3>
               <p>This project is made by four students :</p>
@@ -54,5 +60,3 @@ function About() {
     </>
   );
 }
-
-export default About;

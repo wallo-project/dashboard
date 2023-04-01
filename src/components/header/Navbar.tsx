@@ -1,16 +1,25 @@
+/**
+ * Component that contain the footer of the application.
+ * 
+ * @author WALL-O Dev Team
+ * @version 1.0.0
+ * @since 01/01/2023
+ */
+
+// import required elements
 import { useState } from "react";
 import { Dialog } from "@headlessui/react";
-import {
-  Bars3Icon,
-  LightBulbIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
+import { Bars3Icon, LightBulbIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 
+// props are like arguments to pass
 interface Props {
   routes: Array<{ name: string; to: string }>;
 }
 
+/**
+ * Function that set the theme to apply to the app.
+ */
 function setTheme() {
   if (document.documentElement.classList.contains("dark")) {
     localStorage.theme = ""
@@ -22,7 +31,15 @@ function setTheme() {
   }
 }
 
+/**
+ * Function that return the JSX.Element containing the navbar.
+ * 
+ * @param props routes to display
+ * @returns the navbar of the app.
+ */
 export default function Navbar(props: Props) {
+
+  // state to check if the mobile menu is opened or not
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (

@@ -1,3 +1,12 @@
+/**
+ * Component that export the status display of the dashboard.
+ * 
+ * @author WALL-O Dev Team
+ * @version 1.0.0
+ * @since 01/01/2023
+ */
+
+// import required elements
 import React from "react";
 
 // Props (arguments) passed to the component when mounting it

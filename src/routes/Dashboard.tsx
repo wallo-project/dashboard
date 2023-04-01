@@ -1,6 +1,15 @@
+/**
+ * Component that contain the Dashboard page.
+ * 
+ * @author WALL-O Dev Team
+ * @version 1.0.0
+ * @since 01/01/2023
+ */
+
+// import required elements
 import Header from "../components/header/Header";
 import Commands from "../components/dashboard/Commands";
-import ApiAddressSetup from "../components/dashboard/ApiAddressSetup";
+import ApiAddressSetup from "../components/dashboard/ApiPortSetup";
 import { getApiAddress, isConnected } from "../store/apiSlice";
 import { useAppSelector } from "../store/hooks";
 import {
@@ -20,10 +29,18 @@ import {
 import { useEffect, useState } from "react";
 import StatusDisplay from "../components/dashboard/StatusDisplay";
 
+/**
+ * Function that return the dashboard of the app.
+ * 
+ * @returns JSX.Element.
+ */
 export default function Dashboard() {
+
+  // get the data from the store
   const connected = useAppSelector(isConnected);
   const apiAddress = useAppSelector(getApiAddress);
 
+  // use state to sync data across the component
   const [distanceData, setDistanceData] = useState<{ time: string; value: number }[]>([]);
   const [radarData, setRadarData] = useState<{ area: string, value: number }[]>([]);
   const [statusData, setStatusData] = useState<any>({
@@ -38,10 +55,12 @@ export default function Dashboard() {
     commandResponse: -1,
   });
 
+  // use effect to fetch latest data at regular time interval
   useEffect(() => {
     const intervalId = setInterval(() => {
       const newDistanceData = [...distanceData];
 
+      // fetch if connected
       if (connected) {
         fetch(`${apiAddress}/latest-data`).then((response) => {
 
@@ -79,6 +98,7 @@ export default function Dashboard() {
     return () => clearInterval(intervalId);
   }, [distanceData, apiAddress, radarData, connected, statusData]);
 
+  // return the JSX.Element
   return (
     <>
       <div className="min-h-screen text-black dark:text-white">

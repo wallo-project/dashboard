@@ -1,13 +1,30 @@
+/**
+ * Component that contain the footer of the application.
+ * 
+ * @author WALL-O Dev Team
+ * @version 1.0.0
+ * @since 01/01/2023
+ */
+
+// import required elements
 import { Link } from "react-router-dom";
 
-function Footer() {
+/**
+ * Function that return the footer element.
+ * 
+ * @returns JSX.Element, the footer of the web application.
+ */
+export default function Footer() {
+  // style of the div containing a list of links
   const divClassName: string = "text-left mt-5";
 
+  // style of the titles contained in the lists
   const titleClassName: string = "font-bold text-xl opacity-70";
 
-  const linkClassName: string =
-  "block md:hover:text-blue-800 dark:md:hover:text-blue-300 transition duration-300 ease-in-out";
+  // styles of the links in the lists
+  const linkClassName: string = "block md:hover:text-blue-800 dark:md:hover:text-blue-300 transition duration-300 ease-in-out";
 
+  // return the JSX.Element
   return (
     <>
       <footer className="pb-2 flex flex-col content-center items-center text-center bg-gray-100 dark:bg-gray-900 text-black dark:text-white">
@@ -27,7 +44,7 @@ function Footer() {
               <p className="opacity-70">
                 Wall-O is an autonomous vehicle able to follow a line on the
                 ground and avoid obstacles. This project is carried out as part
-                of the IT licence at CYU.
+                of the bachelor of computer science at CY Cergy Paris University.
               </p>
             </div>
 
@@ -38,11 +55,11 @@ function Footer() {
                   <Link className={linkClassName} to="/">
                     Home
                   </Link>
+                  <Link className={linkClassName} to="/about">
+                    About Us
+                  </Link>
                   <Link className={linkClassName} to="/docs">
                     Documentation
-                  </Link>
-                  <Link className={linkClassName} to="/about">
-                    About
                   </Link>
                   <Link className={linkClassName} to="/dashboard">
                     Dashboard
@@ -90,7 +107,7 @@ function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a className={linkClassName} href="https://benjaminpmd.fr">
+                  <a className={linkClassName} href="https://github.com/benjaminpmd">
                     Benjamin P
                   </a>
                 </li>
@@ -110,5 +127,3 @@ function Footer() {
     </>
   );
 }
-
-export default Footer;

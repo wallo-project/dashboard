@@ -1,3 +1,12 @@
+/**
+ * Component that export the component needed to setup the API port.
+ * 
+ * @author WALL-O Dev Team
+ * @version 1.0.0
+ * @since 01/01/2023
+ */
+
+// import required elements
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { apiActions, isConnected } from "../../store/apiSlice";
@@ -21,7 +30,7 @@ export default function ApiAddressSetup() {
 
   // use state to dynamically update values
   const [portValue, setPortValue] = useState("8081");
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState("Loading...");
   const [error, setErrorStatus] = useState(false);
 
   const handlePortChange = (event: any) => {
@@ -32,9 +41,13 @@ export default function ApiAddressSetup() {
   const handleApiConfig = (e: any) => {
     // prevent reload
     e.preventDefault();
-    // disable errors
-    setErrorStatus(false);
-    setMessage("Loading...");
+
+    // check if the action is triggered by an user input
+    if(e.type === "submit") {
+      // disable error
+      setErrorStatus(false);
+      setMessage("Loading...");
+    }
     // try to call the API
     try {
       fetch(`http://localhost:${portValue}/healthcheck`)
@@ -68,7 +81,6 @@ export default function ApiAddressSetup() {
     let intervalId: any;
     if (!connected) {
       intervalId = setInterval(() => {
-        setMessage("Loading...");
         // try to call the API
         try {
           fetch(`http://localhost:${portValue}/healthcheck`)
@@ -103,7 +115,7 @@ export default function ApiAddressSetup() {
   return (
     <>
       <div className="absolute text-center w-full mx-auto scroll-smooth z-40 p-5 duration-300 transition">
-        <div className="object-center mx-auto w-min p-5 rounded-xl bg-white/30 dark:bg-black/30">
+        <div className="object-center mx-auto max-w-2xl p-5 rounded-xl bg-white/30 dark:bg-black/30">
           <h3 className="text-2xl font-semibold">API Setup</h3>
           <p className={!error ? "p-2" : "p-2 text-red-500"}>{message}</p>
           <form onSubmit={handleApiConfig}>

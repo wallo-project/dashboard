@@ -1,5 +1,15 @@
 /**
+ * Component that contain the troubleshoot section of the documentation page.
+ * 
+ * @author WALL-O Dev Team
+ * @version 1.0.0
+ * @since 01/01/2023
+ */
+
+
+/**
  * Component that export the Setup documentation of the project.
+ * 
  * @returns a JSX.Element.
  */
 export default function Troubleshoot() {

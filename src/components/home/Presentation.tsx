@@ -1,3 +1,16 @@
+/**
+ * Component that contain a title and an image of the robot.
+ * 
+ * @author WALL-O Dev Team
+ * @version 1.0.0
+ * @since 01/01/2023
+ */
+
+/**
+ * Function that export the presentation of the robot.
+ * 
+ * @return a JSX.Element.
+ */
 export default function Presentation() {
   return (
     <section className="text-center text-black dark:text-white">
