@@ -88,7 +88,7 @@ export default function Footer() {
                 <li>
                   <a
                     className={linkClassName}
-                    href="https://github.com/MicheloXy"
+                    href="https://github.com/maxand0"
                   >
                     Maxime A
                   </a>
